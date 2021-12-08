@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <!-- Import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css" />
+
+    <!-- Import the webpage's javascript file -->
+    <script src="/script.js" defer></script>
+    
+     <style media="screen">
+      /* Add space between Vega-Embed links  */
+      .vega-actions a {
+        margin-right: 5px;
+      }
+    </style>
+    
+     <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.18.2"></script>
+  </head>
+  <body>
+    <h1>Scatter Plot Trends</h1>
+    <!-- Container for the visualization -->
+    <div id="vis"></div>
+
+    <script>
+      // Assign the specification to a local variable vlSpec.
+      var vlSpec = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "data": {"url": "https://raw.githubusercontent.com/owid/co2-data/master/owid-co2-data.csv"},
+  "vconcat": [
+    {
+      "width": 1500,
+      "height": 1000,
+      "mark": {"type": "point"},
+      "encoding": {
+        "x": {"field": "year", "type": "temporal"},
+        "y": {"field": "co2", "type": "quantitative"},
+        "color": {"field": "country", "type": "nominal"},
+        "tooltip": {"field": "country", "type": "nominal"}
+      },
+      "transform": [{"filter": {"timeUnit": "year", "field": "year", "gt": "2000"}}],
+      "selection": {"brush": {"type": "interval"}}
+    }
+
+   
+   
+  ]
+}
+     vegaEmbed('#vis', vlSpec);
+    </script>
+  </body>
+</html>

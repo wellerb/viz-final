@@ -1,0 +1,501 @@
+<!-- https://d3-geomap.github.io/map/choropleth/world/ -->
+
+<!DOCTYPE html>
+<!-- Template by html.am -->
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+  <title>Viz Final Project</title>
+  <!-- Google Fonts -->
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic"
+  />
+
+  <!-- CSS Reset -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"
+  />
+
+  <!-- Milligram CSS -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css"
+  />
+
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+  <script src="https://d3js.org/d3.v4.js"></script>
+  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+  <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+  <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.24.0/d3-legend.js"></script>
+  <script src="https://d3js.org/d3.v4.js"></script>
+  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+  <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+  <link href="stylesheets/scroll.css" rel="stylesheet" />
+  <!-- Import the webpage's javascript file -->
+  <script src="https://unpkg.com/topojson@3"></script>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script defer src="script.js" defer></script>
+  <!-- <script defer src="scatter.js" defer></script> -->
+
+  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+  <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+</head>
+
+<body>
+  <header class="header inline-photo show-on-scroll">
+    <div class="image-container">
+      <h1>Global CO2 Emissions and the Food Supply Chain</h1>
+    </div>
+  </header>
+  <div id="intro" style="padding:20px;">
+    <h2 style="color:darkgreen; font-weight:bold"
+    >
+      <center>An Introduction to Greenhouse Gases</center>
+    </h2>
+    <div class="row">
+      <p>
+        A <i>greenhouse gas (GHG)</i> is a gas that contributes to the
+        “greenhouse effect” which traps heat within the Earth’s atmosphere
+        causing the Earth's temperature to rise. GHG's have been increasing
+        dramatically over the past century, and there are many reasons for this.
+        Some of these causes are difficult to provide solutions for, like fossil
+        fuels. Much of the world relies on fossil fuels for energy production--
+        so solving this problem is not so straight forward. However, there are
+        some other factors which can be more easily mitigated, if we just change
+        our own consumption methods. The factor we are speaking to specifically
+        here is Food. The Food Supply Chain is one of the largest producers of
+        GHG's (namely CO2); and, as the world populations continue to rise, the
+        need for food has also risen dramatically. <sup>1</sup> <br />
+        <br />In this data visualization story, we will be answering the
+        question
+        <strong
+          >"How much of an impact does food production have on global greenhouse
+          gas emissions?"
+        </strong>
+        with the hopes of providing information that can be used to allow our
+        viewers to more readily understand not only their own role in the
+        production of GHG's via their consumption of food, but to also hopefully
+        provide possible solutions to help curb this growing problem.
+        <br><br>
+        Here is a small <a href="about.html" target="_blank">About Page </a> that describes how the 
+        work was divided, challenges we faced, and lessons we learned. It also holds a video showcase 
+        for this storyboard!
+ 
+      </p>
+    </div>
+  </div>
+
+  <div id="section1">
+    <h2 style="color:darkgreen; font-weight:bold"
+    >
+      <center>CO2 Production: A Growing Problem</center>
+    </h2>
+    <div class="column">
+      <p>
+        <br />
+        Carbon dioxide emissions are the main driver behind the climate change
+        problem that we face in today's society. This global problem is widely
+        known, and it is commonly recognized that these emissions need to be
+        <i>dramatically</i> decreased, immediately. 
+
+        <center style="font-size:18px"><strong
+          >We know that atmospheric CO2 concentration has been a growing
+          problem, but how bad has it gotten?</strong></center>
+        <p>
+        This chart shows the concentration of CO2 in the atmosphere measured
+        over the past two thousand years. As you can see, the atmospheric CO2
+        concentration remained relatively stagnant at 280 parts/million until
+        the 1800s. Likely due to the technological and agricultrual boom of the
+      1800's, CO2 emissions began to climb. </p>
+
+      <center style="font-size:18px"> <strong><i>And it has yet to slow down.</i> </strong></center>
+        <p>
+        As you can see, the atmospheric CO2 concentration is increasing
+        exponentially. And, in the future, it does not seem like it is going to
+        slow down. As population continunes to increase, more energy and food
+        will need to be produced, and thus, the CO2 concentration will continue
+        to increase.<sup>2</sup>
+        </p>
+    </div>
+    <div class="column">
+      <svg class="co2-linechart" style="height:700px; width:600px; padding:15px"></svg>
+    </div>
+  </div>
+  
+  <div id="sectionC"></div>
+    
+
+
+<!--       </div>    
+    </div> -->
+
+
+  <div id="section2">
+    <h2 style="color:darkgreen; font-weight:bold"
+    >
+      <center>CO2 Production: Global Trends by Country</center>
+    </h2>
+
+    <div class="column">
+      <p>
+        <br /><br />
+        From the above visualization, it is apparent that the CO2 concentration
+        in the atmosphere is increasing exponentially. But, in order to draw
+        conclusions about it, and to then philosophize how the issue could
+        possibly be mitigated, we need a bit more information.
+      </p>
+        <br /><br />
+        <center style = "font-size:35px"><strong>Who's producing all of it? Who's to blame?</strong></center>
+        <br /><br />
+      <p>
+         As we saw in the first visualization, atmospheric CO2 concentration
+        really started to increase in the 19th century. But, it actually began
+        increasing at the greatest rate in the early 20th century. To the right
+        of this description, is a scatterplot that extends from 1920 to the
+        present day. As you can see, the CO2 production of the nations who
+        produce the most CO2 generall was increasing-- some faster than others,
+        but nearly all following a steady, positive linear slope. Specific
+        conclusions that can be drawn speak to the nations that produce the most
+        CO2-- China and the US. As the world's total CO2 production has more
+        than tripled over the past 100 years, these two players were main
+        producers of CO2.
+      </p>
+       
+  
+    </div>
+    
+    
+    <div class="column">
+      <div class="viz5" style="width:700px; height:650px">
+        <html lang="en">
+          <head>
+            <!-- Import the webpage's stylesheet -->
+            <link rel="stylesheet" href="/style.css" />
+
+            <!-- Import the webpage's javascript file -->
+
+            <style media="screen">
+              /* Add space between Vega-Embed links  */
+              .vega-actions a {
+                margin-right: 10px;
+              }
+            </style>
+
+            <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+            <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.1"></script>
+            <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.18.2"></script>
+          </head>
+          <body>
+            <h3>Global CO2 Emission Trends</h3>
+            <!-- Container for the visualization -->
+            <div id="vis"></div>
+          </body>
+        </html>
+      </div>
+    </div>
+  </div>
+
+<div class="row">
+<div class="column">
+    <!DOCTYPE html>
+<!--  vega stuff  -->
+<html lang="en">
+  <head>
+
+    <!-- Import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css" />
+
+    <!-- Import the webpage's javascript file -->
+    <script src="/script.js" defer></script>
+    
+     <style media="screen">
+      /* Add space between Vega-Embed links  */
+      .vega-actions a {
+        margin-right: 5px;
+      }
+    </style>
+    
+     <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.18.2"></script>
+  </head>
+  <body>
+  
+    <!-- Container for the visualization -->
+    <div id="vis0"></div>
+
+    <script>
+      // Assign the specification to a local variable vlSpec.
+      var vlSpec = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 600,
+  "height": {"step": 50},
+  "data": {"url": "https://raw.githubusercontent.com/shevannayee/foodemissionsVIZ/main/PercentBySectors.csv"},
+  "encoding": {
+    "y": {
+      "field": "EmiEco",
+      "type": "nominal",
+      "axis": null
+    }
+  },
+  "layer": [{
+    "mark": {"type": "bar", "color": "#50C878"},
+    "encoding": {
+      "x": {
+        "aggregate": "mean",
+        "field": "Percent",
+        "scale": {"domain": [0, 30]},
+        "title": "Percent of CO2 Emissions (Global Share)"
+      }
+    }
+  }, {
+    "mark": {"type": "text", "align": "left", "x": 5},
+    "encoding": {
+      "text": {"field": "EmiEco"},
+      "detail": {"aggregate": "count"}
+    }
+  }]
+}
+     vegaEmbed('#vis0', vlSpec);
+    </script>
+  </body>
+</html>
+
+    </div>
+    <div class="column">
+      <p>
+        We have seen that CO2 emissions have been on the rise and certain countries emit 
+        a lot of GHGs into the atmosphere. But what consumer sectors exactly are producing all of these harmful emissions?
+        It's not surprising to see that transportation and electricity generation 
+        are the sectors with the highest percent of GHG emissions, but what about smaller, supposedly 'greener' sectors? 
+        <br><br>
+        
+        For this story, we chose to deep dive into the <strong>agriculture sector</strong>. 
+        Even though agriculture is generally considered a smaller producer, we as a group looked at our daily habits and 
+        decided that insight from this data might help us help ourselves and the environment. 
+        Hopefully by analyzing food, we would be able to see what 
+        specifics of the food industry are causing the biggest problems. 
+      </p>
+    </div>
+  </div>
+
+  <div>
+    
+    <div class="row">
+      <div class="column">
+        <h2>
+          <center style="color:darkgreen; font-weight:bold">
+            Analyzing the Global Food Supply Chain
+          </center>
+        </h2>
+        <p>
+          
+          Now that we know what's going on, how serious it is that global levels of CO2 are rising, 
+          who the major players and contributors are, and we heve decided to look closely into the the agriculture
+          sector, it's time to take a closer look at what exactly these contributions are that come from the Global Food Supply Chain.
+          <br><br>
+          The first button, the Land Use Graph, shows the user which food products are, on average, growing in land covereage the most per year by Hectare, 
+          thus causing them to contribute more GHG's to the atmosphere. This allows for interesting inferences into consumer demand as well.
+          The second graph provides us information about which foods, on average, produce the most green house gases, regardless of how much earth-coverage 
+          they require, considered on a global scale.
+          <br><br>
+          As is apparent, the <strong> dairy industry</strong> and dairy products emit the <i>highest</i> amount of CO2 and other GHG's to 
+          the atmosphere (especially when considereing the possible aggregation of data points, for example: Chocolate as a combination of dairy and cocoa. 
+          
+        </p>
+      </div>
+      <div class="column">
+        <center>
+          <button
+             class="button1"
+            style="background-color:DarkGreen; border:green;"
+            onclick="makeHorizontalBarGraph1()"
+          >
+            Land Use Chart
+          </button>
+          <button
+            class="button1"
+            style="background-color:DarkGreen; border:green;"
+            onclick="makeVerticalBarChart1()"
+          >
+            Product Use Chart
+          </button>
+        </center>
+        <svg class="viz4">
+          <text class = "texty1" x="55" y="300" fill="Green" style="font-size:25px">Please select a button above to view the visualization</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="row" style="height:600px; width:600px">
+      <div class="col">
+        <h2 style="color:darkgreen; font-weight:bold">
+          <center>Each Country's Most Produced Food Item</center>
+        </h2>
+        <center>
+          <button
+            class="button1"
+            style="background-color:DarkGreen; border:green;"
+            onclick="makeBubbleChart()"
+          >
+            Bubble Chart
+          </button>
+          <button
+            class="button1"
+            style="background-color:DarkGreen; border:green;"
+            onclick="makeDaMap()"
+          >
+            Map
+          </button>
+        </center>
+        <svg class="bubbleChart" style="width:700px; height:500px"> 
+           <text class = "texty" x="55" y="250" fill="Green" style="font-size:25px">Please select a button above to view the visualization</text>
+        </svg>
+        <div id="tooltip1" class="hidden">
+          <p><span id="value"></span></p>
+        </div>
+      </div>
+      <div class="col">
+        <center> <br><br><br><div class="jettasRequest" style="height:500px;width:800px"></div></center>
+      </div>
+    </div>
+
+    <div class="row">
+      <p>
+        <br><br>
+        Even though the meat and dairy industry are known to release large
+        amounts of greenhouse gases, we thought it would be interesting to analyze the countries who produce the most GHG's, specifically through
+        their food supply chains. In the above vizualizations, we offer two different views of this data. 
+        <br><br>
+        In the bubble chart, the size of the bubble is encoded on the amount of GHG's the country emits via their food supply chain. 
+        Thus, the larger bubbles are representative 
+        of countries that are reponsible for more GHG production from their food supply chain. 
+        On the click of a bubble, a new bar graph will appear that breaks down this GHG production further-- it tells 
+        us the products that each country produces that are the greatest producers (themeselves) of GHG's. 
+        The color of the bubble is indivative of which product was the highest GHG producing item in that country.
+        For example, there is a lot of light green in the bubble chart-- this is because most countries highest GHG producing product is whole milk!
+        <br><br>
+        The other view we present is a map. The darker the shade of green the country is, the more GHG emissions from its food supply chain 
+        it is responsible for. As we can see China, the US, and India are the darkest shade of green
+        which means they are responsible for producing food products that emit the more GHGs.
+      </p>
+    </div>
+
+    <div class="row">
+      <center>
+        <h2 style="color:darkgreen; font-weight:bold">
+          Share of Global CO2 Production and Percentage From Food Supply Chain
+        </h2>
+<!--       <div class="viz6"> -->
+<!--         <div class = 'groupedBarChart'> -->
+           <div class = "row">
+      <div class = 'groupedBarChart'>
+        
+      </div>
+    </div>
+        
+<!--       </div> -->
+      </center>
+    </div>
+    <div class="row">
+      <p>
+        This grouped bar chart shows two different things. The dark green bar is representative of the percentage of global 
+        green house gas emissions each country is responsible for. The light green bar is the percentage of each country's green house gas production
+        that comes from the food supply chain in that country. From this, we can infer a bit more of the causality of these emissions.
+        It makes sense that China and Indonesia have a large fraction of their
+        total GHG emissions coming from food production, because they have such large populations, that they must produce more food than other nations 
+        in order to keep everyone fed. 
+        <br><br>
+        So now we understand that different countries produce different food products and those food products release a different amount of GHGs into our atmosphere.
+        For example, chocolate was the highest global GHG producing food product, but it wasn't any countries single highest export. Whole milk was one
+        of the most common products a country would produce. 
+        
+      </p>
+    </div>
+   
+    <br />
+    <div class = "row">
+      <div class = "column">
+        <h2 style="color:darkgreen; font-weight:bold"> <center>
+          CO2 Emissions and GDP: A Broadened View </center>
+        </h2>
+        <div class = "bubblePlot" style="height:700px;width:900px;">
+      
+        </div>
+      </div>
+      <div class = "column">
+        <p>
+          <br><br>
+          This graph shows us CO2 Emissions when compared to a countries population and GDP. The bigger the bubble, the more populated that country is
+          and the closer the bubble gets to the right, the higher its GDP. The United States is the top right larger yellow bubble while China is the largest green
+          bubble with a smaller GDP. It is interesting to see how even though China looks like it does not produce a lot of CO2, we have to account for this
+          visualization being per capita and China having a large population/large capita.
+          <br><br>
+           Now that we have a bit more context, and we see the impact each country commits to this global problem we can return to the original question at hand.
+          <strong>How much of an impact does food production have on global greenhouse gas emissions?</strong> 
+          What was the point of all of this data? 
+          <br><br>
+          
+        </p>
+      </div>
+    </div>
+   
+    <div class = "row">
+      <div class = "column">
+        <h2 style="color:darkgreen; font-weight:bold"> <center>
+          Change in CO2: A positive outlook </center>
+        </h2>
+        <div class = "changeLineGraph" style="height:600px;width:650px;">
+      
+        </div>
+      </div>
+      <div class = "column">
+        <p>
+          <br><br>
+          This graph helps answer that question a little further. It shows us how the CO2 emissions have changed 
+          in the past few decades. As we can see, there has been a general trend for food production emissions
+          to be <i>increasing</i> as the global GDP increases. Even though this is not ideal, we see that around the early 2010s,
+          the GHG emission rate starts to level off. This is important because it means that countries started taking account
+          of what GHGs they produce and started to make an effort to lessen the amount of emissions they released
+          
+          <br><br>
+          We learned in the beginning the food produced GHGs only account for about 10% of the global GHG emissions, but
+          we learned later on that some countries are more impacted by food produced GHGs than others. For example, China
+          has a large percentage of GHGs coming from food emissions. We also learned that chocolate is the food product producing the highest
+          levels of GHG emissions, while whole milk was deemed the most common food product per each country to produce the most GHG
+          emissions. We found it interesting how whole milk and chocolate were the two biggest perpetrators of GHG emissions.
+          It wasn't clear at first how they linked together but upon further analysis we determined that chocolate needs milk to be produced, so the chocolate
+          data point is essentially combined with some aspects of milk causing it to be so high. 
+          <br><br>
+          As students who are still growing and have a chance to make a real impact on our environment, we enjoyed this storyboard because it showed us what
+          foods cause the most amount of GHGs to be released into the atmosphere. We learned to avoid not only meat as the media states, but also milk, chocolate
+          and a variety of oils such as palm oil. It is encouraging to learn that food production emissions are lowering and continuing to lower as a nation's GDP
+          increases and the country acknowledges the serverity of climate change and CO2 emissions, but it is our job to continue to be aware of what emissions are
+          coming from what and to try to limit the amount of GHG that gets released into our atmosphere.
+          
+        </p>
+      </div>
+    </div>
+    <div id="footer-wrapper">
+      <footer class="footer">
+        <p>
+          This storyboard was created by Jetta Chu, Brian Weller, Patrick
+          O'Doherty, and Shevanna Yee as our final project for our Visualiation
+          class 2021.<br>
+          <sup>1</sup> -
+          https://ourworldindata.org/environmental-impacts-of-food
+          <br />
+          <sup>2</sup> - https://news.un.org/en/story/2021/03/1086822
+          
+        </p>
+      </footer>
+    </div>
+  </div>
+  <script src="javascripts/show-on-scroll.js"></script>
+</body>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <!-- Import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css" />
+
+    <!-- Import the webpage's javascript file -->
+    <script src="/script.js" defer></script>
+    
+     <style media="screen">
+      /* Add space between Vega-Embed links  */
+      .vega-actions a {
+        margin-right: 5px;
+      }
+    </style>
+    
+     <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.18.2"></script>
+  </head>
+  <body>
+  
+    <!-- Container for the visualization -->
+    <div id="vis0"></div>
+
+    <script>
+      // Assign the specification to a local variable vlSpec.
+      var vlSpec = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 200,
+  "height": {"step": 20},
+  "data": {"url": "https://raw.githubusercontent.com/shevannayee/foodemissionsVIZ/main/GHG-Emissions-by-sector.csv"},
+  "encoding": {
+    "y": {
+      "field": "Sub-sector",
+      "type": "nominal",
+      "axis": null
+    }
+  },
+  "layer": [{
+    "mark": {"type": "bar", "color": "#50C878"},
+    "encoding": {
+      "x": {
+        "aggregate": "mean",
+        "field": "GlobalShare",
+        "scale": {"domain": [0, 12]},
+        "title": "CO2 Emissions (Global Share)"
+      }
+    }
+  }, {
+    "mark": {"type": "text", "align": "left", "x": 5},
+    "encoding": {
+      "text": {"field": "Sub-sector"},
+      "detail": {"aggregate": "count"}
+    }
+  }]
+}
+     vegaEmbed('#vis0', vlSpec);
+    </script>
+  </body>
+</html>
